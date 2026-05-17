@@ -1,0 +1,9 @@
+README.md
+pyproject.toml
+src/preprocess.py
+src/unpack_data.py
+src/data_lakes_practice.egg-info/PKG-INFO
+src/data_lakes_practice.egg-info/SOURCES.txt
+src/data_lakes_practice.egg-info/dependency_links.txt
+src/data_lakes_practice.egg-info/requires.txt
+src/data_lakes_practice.egg-info/top_level.txt

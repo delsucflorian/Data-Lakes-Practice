@@ -28,8 +28,17 @@ def unpack_data(input_dir: str, output_file: str) -> None:
     """
     input_path = Path(input_dir)
     output_path = Path(output_file)
+    directories = [x for x in input_path.iterdir() if x.is_dir()]
+    list_datasets = []
+    for directory in directories:
+        list_datasets += [x for x in directory.iterdir() if x.is_file()]
+    print(f"Found {len(list_datasets)} files to combine.")
+    all_data = pd.concat([pd.read_csv(file) for file in list_datasets])
+    print(len(all_data), "rows combined and saved to", output_path)
+    all_data.to_csv(output_path, index=False, sep=";")
+    
 
-    # TODO: implement the unpacking logic
+   
     pass
 
 
