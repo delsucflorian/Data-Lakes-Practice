@@ -19,11 +19,11 @@ def download_wikitext():
     Retourne l'objet dataset contenant les splits 'train', 'validation', 'test'.
     Chaque élément possède un champ 'text'.
     """
-    # TODO: Charger le dataset avec load_dataset()
-    #   - Nom du dataset : "Salesforce/wikitext"
-    #   - Configuration : "wikitext-2-raw-v1"
-    #   - Retourner l'objet dataset
-    pass
+
+    from datasets import load_dataset
+
+    dataset = load_dataset("Salesforce/wikitext", name="wikitext-2-raw-v1") 
+    return dataset
 
 
 def clean_split(dataset_split):
@@ -36,27 +36,29 @@ def clean_split(dataset_split):
     Returns:
         Liste de chaînes de caractères nettoyées.
     """
-    # TODO:
-    #   1. Extraire la liste des textes depuis dataset_split (champ "text")
-    #   2. Supprimer les lignes vides ou ne contenant que des espaces
-    #      Indice : utiliser str.strip() pour vérifier
-    #   3. Supprimer les doublons
-    #      Indice : convertir en set ou utiliser pandas.DataFrame.drop_duplicates()
-    #   4. Retourner la liste nettoyée
-    pass
-
+    texts = [entry["text"] for entry in dataset_split]
+    cleaned = set()
+    for text in texts : #""" set permet de supprimer les doublons """
+        if text.strip() != "":
+            cleaned.add(text)
+    return list(cleaned)
+    
 
 def create_mysql_connection(host, user, password, database):
     """
     Crée et retourne une connexion MySQL.
     Retourne None en cas d'erreur.
     """
-    # TODO: Utiliser mysql.connector.connect() avec les paramètres fournis
-    #   - Gérer l'exception mysql.connector.Error
-    #   - Afficher un message d'erreur si la connexion échoue
-    #   - Retourner la connexion ou None
-    pass
-
+    try : 
+        conn = mysql.connector.connect(
+            host=host, user=user, port=3307,
+            password=password, database=database
+        )
+        print("Connexion MySQL réussie.")
+        return conn
+    except Error as e:
+        print(f"Erreur de connexion MySQL : {e}")
+        return None
 
 def create_table(connection):
     """
@@ -68,11 +70,13 @@ def create_table(connection):
         split       VARCHAR(20) NOT NULL
         created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     """
-    # TODO:
-    #   1. Créer un curseur
-    #   2. Exécuter la requête CREATE TABLE IF NOT EXISTS
-    #   3. Commit
-    pass
+    connection.cursor().execute("""
+        CREATE TABLE IF NOT EXISTS texts (id INT AUTO_INCREMENT PRIMARY KEY, 
+                                          text TEXT NOT NULL, 
+                                          split VARCHAR(20) NOT NULL, 
+                                          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP) 
+                                          """ ) 
+    connection.commit() 
 
 
 def insert_data(connection, texts, split_name):
@@ -84,13 +88,13 @@ def insert_data(connection, texts, split_name):
         texts: liste de chaînes de caractères
         split_name: nom du split ("train", "validation", "test")
     """
-    # TODO:
-    #   1. Créer un curseur
-    #   2. Préparer la requête INSERT INTO texts (text, split) VALUES (%s, %s)
-    #   3. Préparer les valeurs : liste de tuples (text, split_name)
-    #   4. Utiliser cursor.executemany() pour l'insertion par batch
-    #   5. Commit et afficher le nombre de lignes insérées
-    pass
+    cursor = connection.cursor()
+    values = list()
+    for text in texts :
+        values.append((text, split_name))
+    cursor.executemany("INSERT INTO texts (text, split) VALUES (%s, %s)", values)
+    connection.commit()
+    print(f"  {cursor.rowcount} lignes insérées.")
 
 
 def validate_data(connection):
@@ -102,9 +106,28 @@ def validate_data(connection):
         2. Nombre de textes vides (WHERE TRIM(text) = '')
         3. Aperçu des 5 premières lignes (id, début du texte, split)
     """
-    # TODO: Exécuter chaque requête, récupérer les résultats avec fetchall(),
-    #   et les afficher de manière lisible.
-    pass
+    cursor = connection.cursor()
+
+    print("\n  1. Nombre de lignes par split :")
+    cursor.execute("SELECT split, COUNT(*) FROM texts GROUP BY split")
+    for row in cursor.fetchall():
+        print(f"    - Split '{row[0]}': {row[1]} lignes")
+
+    print("\n  2. Nombre de textes vides (après TRIM) :")
+    cursor.execute("SELECT COUNT(*) FROM texts WHERE TRIM(text) = ''")
+    empty_count = cursor.fetchone()[0]
+    print(f"    - {empty_count} textes vides")
+
+    print("\n  3. Aperçu des 5 premières lignes :")
+    cursor.execute("SELECT id, LEFT(text, 80) as text_preview, split FROM texts LIMIT 5")
+    for row in cursor.fetchall():
+        print(f"    - ID: {row[0]}, Texte: '{row[1]}...', Split: '{row[2]}'")
+
+    cursor.close()
+
+
+
+
 
 
 def main():
