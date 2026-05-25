@@ -40,7 +40,7 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=staging
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
@@ -68,7 +68,10 @@ services:
     image: apache/airflow:2.7.1
     container_name: airflow-webserver
     depends_on:
-      - postgres
+      airflow-init:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_started
     environment:
       - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
@@ -119,17 +122,7 @@ services:
       - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
     command: >
-      bash -c "
-        airflow db init &&
-        airflow users delete --username airflow || true &&
-        airflow users create \
-          --username airflow \
-          --password airflow \
-          --firstname Admin \
-          --lastname User \
-          --role Admin \
-          --email admin@example.com
-      "
+      bash -c "airflow db init && airflow users delete --username airflow || true && airflow users create --username airflow --password airflow --firstname Admin --lastname User --role Admin --email admin@example.com"
     volumes:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs

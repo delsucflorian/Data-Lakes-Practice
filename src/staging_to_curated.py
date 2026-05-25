@@ -15,6 +15,7 @@ import mysql.connector
 from pymongo import MongoClient
 from transformers import AutoTokenizer
 from tqdm import tqdm
+from load_to_staging import create_mysql_connection
 
 
 def get_staging_data(host, user, password, database, split="train"):
@@ -36,7 +37,17 @@ def get_staging_data(host, user, password, database, split="train"):
     #   4. Récupérer tous les résultats avec fetchall()
     #   5. Fermer la connexion
     #   6. Retourner les résultats
-    pass
+
+    conn = create_mysql_connection(host, user, password, database)
+    if not conn:
+        return None
+    else : 
+        cursor = conn.cursor()
+        query = "SELECT id, text FROM texts WHERE split = %s"
+        cursor.execute(query, (split,))
+        results = cursor.fetchall()
+        conn.close()
+        return results
 
 
 def tokenize_texts(texts, tokenizer, max_length=512):
@@ -61,8 +72,8 @@ def tokenize_texts(texts, tokenizer, max_length=512):
     #
     #   Note : le tokenizer accepte directement une liste de textes,
     #   ce qui est beaucoup plus rapide qu'une boucle.
-    pass
-
+    encoded = tokenizer(texts, truncation=True, max_length=max_length, padding=False)
+    return encoded["input_ids"]
 
 def prepare_documents(rows, all_tokens, split_name, tokenizer_name, max_length):
     """
@@ -98,8 +109,23 @@ def prepare_documents(rows, all_tokens, split_name, tokenizer_name, max_length):
     #   Pour chaque paire, construire le dictionnaire décrit ci-dessus.
     #   Utiliser datetime.utcnow().isoformat() pour le timestamp.
     #   Retourner la liste de documents.
-    pass
-
+    documents = []
+    for (original_id, text), tokens in zip(rows, all_tokens):
+        document = {
+            "original_id": original_id,
+            "text": text,
+            "tokens": tokens,
+            "num_tokens": len(tokens), 
+            "metadata" : {
+                "source": "mysql_staging",
+                "split": split_name,
+                "tokenizer": tokenizer_name,
+                "max_length": max_length,
+                "processed_at": datetime.utcnow().isoformat()
+            }
+        }
+        documents.append(document)
+    return documents
 
 def insert_to_mongodb(documents, mongo_uri, batch_size=1000):
     """
@@ -120,7 +146,18 @@ def insert_to_mongodb(documents, mongo_uri, batch_size=1000):
     #      - Appeler collection.insert_many(batch) sur chaque tranche
     #   5. Afficher le nombre total de documents insérés
     #   6. Fermer la connexion
-    pass
+    client = MongoClient(mongo_uri)
+    db = client["curated"]
+    collection = db["wikitext"]
+    collection.delete_many({})
+    total_inserted = 0
+    for i in range(0, len(documents), batch_size):
+        batch = documents[i:i+batch_size]
+        result = collection.insert_many(batch)
+        total_inserted += len(result.inserted_ids)
+    print(f"  {total_inserted} documents insérés dans MongoDB.")
+    client.close()
+
 
 
 def verify_mongodb(mongo_uri):
@@ -153,7 +190,28 @@ def verify_mongodb(mongo_uri):
     #
     #   5. Fermer la connexion
     pass
+    client = MongoClient(mongo_uri)
+    db = client["curated"]
+    collection = db["wikitext"]
+    total_docs = collection.count_documents({})
+    print(f"  Nombre total de documents : {total_docs}")
+    print("\n  Exemples de documents :")
+    for doc in collection.find().limit(3):
+        print(f"    - ID: {doc['original_id']}, Texte: {doc['text'][:60]} , Tokens: {doc['num_tokens']}")
+    print("\n  Statistiques sur le nombre de tokens :")
 
+    stats = collection.aggregate([
+        {"$group": {
+            "_id": None,
+            "avg_tokens": {"$avg": "$num_tokens"},
+            "min_tokens": {"$min": "$num_tokens"},
+            "max_tokens": {"$max": "$num_tokens"}
+        }}
+    ]).next()
+    print(f"    - Moyenne : {stats['avg_tokens']:.2f}")
+    print(f"    - Minimum : {stats['min_tokens']}")
+    print(f"    - Maximum : {stats['max_tokens']}") 
+    client.close()
 
 def main():
     parser = argparse.ArgumentParser(
