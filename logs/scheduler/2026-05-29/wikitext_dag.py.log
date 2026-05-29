@@ -1699,3 +1699,80 @@
 [2026-05-29T11:24:45.858+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:24:45.858+0000] {dag.py:2915} INFO - Sync 1 DAGs
 [2026-05-29T11:24:45.879+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:24:45.879+0000] {dag.py:3696} INFO - Setting next_dagrun for data_lake_pipeline to 2025-01-01T00:00:00+00:00, run_after=2025-01-02T00:00:00+00:00
 [2026-05-29T11:24:45.945+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/wikitext_dag.py took 0.147 seconds
+[2026-05-29T11:25:16.082+0000] {processor.py:157} INFO - Started process (PID=1317) to work on /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:25:16.085+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/wikitext_dag.py for tasks to queue
+[2026-05-29T11:25:16.086+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:25:16.085+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:25:16.112+0000] {processor.py:839} INFO - DAG(s) dict_keys(['data_lake_pipeline']) retrieved from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:25:16.145+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:25:16.145+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2026-05-29T11:25:16.164+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:25:16.164+0000] {dag.py:3696} INFO - Setting next_dagrun for data_lake_pipeline to 2025-01-01T00:00:00+00:00, run_after=2025-01-02T00:00:00+00:00
+[2026-05-29T11:25:16.179+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/wikitext_dag.py took 0.103 seconds
+[2026-05-29T11:25:46.482+0000] {processor.py:157} INFO - Started process (PID=1327) to work on /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:25:46.485+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/wikitext_dag.py for tasks to queue
+[2026-05-29T11:25:46.486+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:25:46.486+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:25:46.500+0000] {processor.py:839} INFO - DAG(s) dict_keys(['data_lake_pipeline']) retrieved from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:25:46.523+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:25:46.523+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2026-05-29T11:25:46.540+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:25:46.540+0000] {dag.py:3696} INFO - Setting next_dagrun for data_lake_pipeline to 2025-01-01T00:00:00+00:00, run_after=2025-01-02T00:00:00+00:00
+[2026-05-29T11:25:46.553+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/wikitext_dag.py took 0.075 seconds
+[2026-05-29T11:26:16.872+0000] {processor.py:157} INFO - Started process (PID=1337) to work on /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:26:16.874+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/wikitext_dag.py for tasks to queue
+[2026-05-29T11:26:16.876+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:26:16.875+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:26:16.892+0000] {processor.py:839} INFO - DAG(s) dict_keys(['data_lake_pipeline']) retrieved from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:26:16.921+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:26:16.921+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2026-05-29T11:26:16.934+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:26:16.934+0000] {dag.py:3696} INFO - Setting next_dagrun for data_lake_pipeline to 2025-01-01T00:00:00+00:00, run_after=2025-01-02T00:00:00+00:00
+[2026-05-29T11:26:16.946+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/wikitext_dag.py took 0.079 seconds
+[2026-05-29T11:26:47.280+0000] {processor.py:157} INFO - Started process (PID=1347) to work on /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:26:47.283+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/wikitext_dag.py for tasks to queue
+[2026-05-29T11:26:47.285+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:26:47.285+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:26:47.305+0000] {processor.py:839} INFO - DAG(s) dict_keys(['data_lake_pipeline']) retrieved from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:26:47.338+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:26:47.337+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2026-05-29T11:26:47.352+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:26:47.352+0000] {dag.py:3696} INFO - Setting next_dagrun for data_lake_pipeline to 2025-01-01T00:00:00+00:00, run_after=2025-01-02T00:00:00+00:00
+[2026-05-29T11:26:47.367+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/wikitext_dag.py took 0.095 seconds
+[2026-05-29T11:27:17.677+0000] {processor.py:157} INFO - Started process (PID=1357) to work on /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:27:17.681+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/wikitext_dag.py for tasks to queue
+[2026-05-29T11:27:17.682+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:27:17.682+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:27:17.703+0000] {processor.py:839} INFO - DAG(s) dict_keys(['data_lake_pipeline']) retrieved from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:27:17.735+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:27:17.735+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2026-05-29T11:27:17.751+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:27:17.751+0000] {dag.py:3696} INFO - Setting next_dagrun for data_lake_pipeline to 2025-01-01T00:00:00+00:00, run_after=2025-01-02T00:00:00+00:00
+[2026-05-29T11:27:17.764+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/wikitext_dag.py took 0.094 seconds
+[2026-05-29T11:27:47.964+0000] {processor.py:157} INFO - Started process (PID=1367) to work on /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:27:47.969+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/wikitext_dag.py for tasks to queue
+[2026-05-29T11:27:47.970+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:27:47.969+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:27:47.985+0000] {processor.py:839} INFO - DAG(s) dict_keys(['data_lake_pipeline']) retrieved from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:27:48.010+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:27:48.010+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2026-05-29T11:27:48.024+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:27:48.024+0000] {dag.py:3696} INFO - Setting next_dagrun for data_lake_pipeline to 2025-01-01T00:00:00+00:00, run_after=2025-01-02T00:00:00+00:00
+[2026-05-29T11:27:48.038+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/wikitext_dag.py took 0.079 seconds
+[2026-05-29T11:28:18.380+0000] {processor.py:157} INFO - Started process (PID=1377) to work on /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:28:18.384+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/wikitext_dag.py for tasks to queue
+[2026-05-29T11:28:18.385+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:28:18.384+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:28:18.401+0000] {processor.py:839} INFO - DAG(s) dict_keys(['data_lake_pipeline']) retrieved from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:28:18.430+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:28:18.429+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2026-05-29T11:28:18.448+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:28:18.448+0000] {dag.py:3696} INFO - Setting next_dagrun for data_lake_pipeline to 2025-01-01T00:00:00+00:00, run_after=2025-01-02T00:00:00+00:00
+[2026-05-29T11:28:18.460+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/wikitext_dag.py took 0.088 seconds
+[2026-05-29T11:28:48.752+0000] {processor.py:157} INFO - Started process (PID=1387) to work on /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:28:48.755+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/wikitext_dag.py for tasks to queue
+[2026-05-29T11:28:48.757+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:28:48.756+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:28:48.780+0000] {processor.py:839} INFO - DAG(s) dict_keys(['data_lake_pipeline']) retrieved from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:28:48.811+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:28:48.811+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2026-05-29T11:28:48.830+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:28:48.830+0000] {dag.py:3696} INFO - Setting next_dagrun for data_lake_pipeline to 2025-01-01T00:00:00+00:00, run_after=2025-01-02T00:00:00+00:00
+[2026-05-29T11:28:48.845+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/wikitext_dag.py took 0.100 seconds
+[2026-05-29T11:29:19.109+0000] {processor.py:157} INFO - Started process (PID=1397) to work on /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:29:19.113+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/wikitext_dag.py for tasks to queue
+[2026-05-29T11:29:19.116+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:29:19.115+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:29:19.136+0000] {processor.py:839} INFO - DAG(s) dict_keys(['data_lake_pipeline']) retrieved from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:29:19.178+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:29:19.178+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2026-05-29T11:29:19.197+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:29:19.197+0000] {dag.py:3696} INFO - Setting next_dagrun for data_lake_pipeline to 2025-01-01T00:00:00+00:00, run_after=2025-01-02T00:00:00+00:00
+[2026-05-29T11:29:19.212+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/wikitext_dag.py took 0.111 seconds
+[2026-05-29T11:29:49.416+0000] {processor.py:157} INFO - Started process (PID=1407) to work on /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:29:49.419+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/wikitext_dag.py for tasks to queue
+[2026-05-29T11:29:49.420+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:29:49.420+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:29:49.436+0000] {processor.py:839} INFO - DAG(s) dict_keys(['data_lake_pipeline']) retrieved from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:29:49.468+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:29:49.467+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2026-05-29T11:29:49.500+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:29:49.500+0000] {dag.py:3696} INFO - Setting next_dagrun for data_lake_pipeline to 2025-01-01T00:00:00+00:00, run_after=2025-01-02T00:00:00+00:00
+[2026-05-29T11:29:49.525+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/wikitext_dag.py took 0.116 seconds
+[2026-05-29T11:30:19.833+0000] {processor.py:157} INFO - Started process (PID=1417) to work on /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:30:19.835+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/wikitext_dag.py for tasks to queue
+[2026-05-29T11:30:19.837+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:30:19.836+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:30:19.856+0000] {processor.py:839} INFO - DAG(s) dict_keys(['data_lake_pipeline']) retrieved from /opt/airflow/dags/wikitext_dag.py
+[2026-05-29T11:30:19.892+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:30:19.892+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2026-05-29T11:30:19.911+0000] {logging_mixin.py:151} INFO - [2026-05-29T11:30:19.911+0000] {dag.py:3696} INFO - Setting next_dagrun for data_lake_pipeline to 2025-01-01T00:00:00+00:00, run_after=2025-01-02T00:00:00+00:00
+[2026-05-29T11:30:19.926+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/wikitext_dag.py took 0.098 seconds
