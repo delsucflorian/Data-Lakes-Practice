@@ -2,14 +2,22 @@ version: '3.8'
 
 services:
   localstack:
-    image: localstack/localstack
+    image: localstack/localstack:3.4.0
     container_name: localstack
     ports:
       - "4566:4566"
-      - "4572:4572"
     environment:
       - SERVICES=s3
       - DOCKER_HOST=unix:///var/run/docker.sock
+      - DEFAULT_REGION=us-east-1
+    volumes:
+      - localstack_data:/var/lib/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
   mongodb:
     image: mongo:latest
@@ -40,7 +48,7 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=staging
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
@@ -134,3 +142,4 @@ volumes:
   elasticsearch-data:
   mysql_data:
   postgres_data:
+  localstack_data:
