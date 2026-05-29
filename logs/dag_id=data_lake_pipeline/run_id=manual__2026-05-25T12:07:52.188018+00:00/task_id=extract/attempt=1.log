@@ -1,0 +1,24 @@
+[2026-05-25T12:07:53.974+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: data_lake_pipeline.extract manual__2026-05-25T12:07:52.188018+00:00 [queued]>
+[2026-05-25T12:07:53.978+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: data_lake_pipeline.extract manual__2026-05-25T12:07:52.188018+00:00 [queued]>
+[2026-05-25T12:07:53.979+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 2
+[2026-05-25T12:07:53.985+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): extract> on 2026-05-25 12:07:52.188018+00:00
+[2026-05-25T12:07:53.988+0000] {standard_task_runner.py:57} INFO - Started process 298 to run task
+[2026-05-25T12:07:53.991+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'data_lake_pipeline', 'extract', 'manual__2026-05-25T12:07:52.188018+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/data_lake_pipeline.py', '--cfg-path', '/tmp/tmpddv09mpr']
+[2026-05-25T12:07:53.996+0000] {standard_task_runner.py:85} INFO - Job 2: Subtask extract
+[2026-05-25T12:07:54.006+0000] {logging_mixin.py:151} WARNING - /home/***/.local/lib/python3.8/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2026-05-25T12:07:54.032+0000] {task_command.py:415} INFO - Running <TaskInstance: data_lake_pipeline.extract manual__2026-05-25T12:07:52.188018+00:00 [running]> on host 4f10631135a5
+[2026-05-25T12:07:54.076+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='data_lake_pipeline' AIRFLOW_CTX_TASK_ID='extract' AIRFLOW_CTX_EXECUTION_DATE='2026-05-25T12:07:52.188018+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-25T12:07:52.188018+00:00'
+[2026-05-25T12:07:54.077+0000] {logging_mixin.py:151} INFO - Extraction du dataset Wikitext-2 
+[2026-05-25T12:07:58.670+0000] {logging_mixin.py:151} WARNING - Generating test split:   0%|          | 0/4358 [00:00<?, ? examples/s]
+[2026-05-25T12:07:58.707+0000] {logging_mixin.py:151} WARNING - Generating test split: 100%|##########| 4358/4358 [00:00<00:00, 120770.77 examples/s]
+[2026-05-25T12:07:58.708+0000] {logging_mixin.py:151} WARNING - Generating train split:   0%|          | 0/36718 [00:00<?, ? examples/s]
+[2026-05-25T12:07:58.745+0000] {logging_mixin.py:151} WARNING - Generating train split: 100%|##########| 36718/36718 [00:00<00:00, 988716.61 examples/s]
+[2026-05-25T12:07:58.746+0000] {logging_mixin.py:151} WARNING - Generating validation split:   0%|          | 0/3760 [00:00<?, ? examples/s]
+[2026-05-25T12:07:58.750+0000] {logging_mixin.py:151} WARNING - Generating validation split: 100%|##########| 3760/3760 [00:00<00:00, 961152.06 examples/s]
+[2026-05-25T12:07:59.790+0000] {logging_mixin.py:151} INFO -   ✓ 36718 lignes uploadées → s3://wikitext-bucket/raw/train.json
+[2026-05-25T12:07:59.846+0000] {logging_mixin.py:151} INFO -   ✓ 3760 lignes uploadées → s3://wikitext-bucket/raw/validation.json
+[2026-05-25T12:07:59.905+0000] {logging_mixin.py:151} INFO -   ✓ 4358 lignes uploadées → s3://wikitext-bucket/raw/test.json
+[2026-05-25T12:07:59.906+0000] {python.py:194} INFO - Done. Returned value was: raw
+[2026-05-25T12:07:59.918+0000] {taskinstance.py:1398} INFO - Marking task as SUCCESS. dag_id=data_lake_pipeline, task_id=extract, execution_date=20260525T120752, start_date=20260525T120753, end_date=20260525T120759
+[2026-05-25T12:07:59.962+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2026-05-25T12:07:59.976+0000] {taskinstance.py:2776} INFO - 1 downstream tasks scheduled from follow-on schedule check

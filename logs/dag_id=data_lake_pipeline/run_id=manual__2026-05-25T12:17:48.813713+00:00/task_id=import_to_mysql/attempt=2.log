@@ -1,0 +1,25 @@
+[2026-05-25T12:22:59.125+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: data_lake_pipeline.import_to_mysql manual__2026-05-25T12:17:48.813713+00:00 [queued]>
+[2026-05-25T12:22:59.129+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: data_lake_pipeline.import_to_mysql manual__2026-05-25T12:17:48.813713+00:00 [queued]>
+[2026-05-25T12:22:59.129+0000] {taskinstance.py:1359} INFO - Starting attempt 2 of 2
+[2026-05-25T12:22:59.134+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): import_to_mysql> on 2026-05-25 12:17:48.813713+00:00
+[2026-05-25T12:22:59.138+0000] {standard_task_runner.py:57} INFO - Started process 734 to run task
+[2026-05-25T12:22:59.140+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'data_lake_pipeline', 'import_to_mysql', 'manual__2026-05-25T12:17:48.813713+00:00', '--job-id', '14', '--raw', '--subdir', 'DAGS_FOLDER/data_lake_pipeline.py', '--cfg-path', '/tmp/tmpc1a1_8m3']
+[2026-05-25T12:22:59.143+0000] {standard_task_runner.py:85} INFO - Job 14: Subtask import_to_mysql
+[2026-05-25T12:22:59.158+0000] {logging_mixin.py:151} WARNING - /home/***/.local/lib/python3.8/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2026-05-25T12:22:59.176+0000] {task_command.py:415} INFO - Running <TaskInstance: data_lake_pipeline.import_to_mysql manual__2026-05-25T12:17:48.813713+00:00 [running]> on host 4f10631135a5
+[2026-05-25T12:22:59.215+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='data_lake_pipeline' AIRFLOW_CTX_TASK_ID='import_to_mysql' AIRFLOW_CTX_EXECUTION_DATE='2026-05-25T12:17:48.813713+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-25T12:17:48.813713+00:00'
+[2026-05-25T12:22:59.223+0000] {logging_mixin.py:151} INFO - Importation dans MySQL (staging)...
+[2026-05-25T12:22:59.462+0000] {logging_mixin.py:151} INFO - Erreur de connexion MySQL : 2003 (HY000): Can't connect to MySQL server on 'mysql:3307' (111)
+[2026-05-25T12:22:59.462+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/data_lake_pipeline.py", line 101, in import_to_mysql
+    raise ConnectionError("Impossible de se connecter à MySQL.")
+ConnectionError: Impossible de se connecter à MySQL.
+[2026-05-25T12:22:59.467+0000] {taskinstance.py:1398} INFO - Marking task as FAILED. dag_id=data_lake_pipeline, task_id=import_to_mysql, execution_date=20260525T121748, start_date=20260525T122259, end_date=20260525T122259
+[2026-05-25T12:22:59.472+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 14 for task import_to_mysql (Impossible de se connecter à MySQL.; 734)
+[2026-05-25T12:22:59.503+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2026-05-25T12:22:59.517+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

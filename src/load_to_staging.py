@@ -44,14 +44,14 @@ def clean_split(dataset_split):
     return list(cleaned)
     
 
-def create_mysql_connection(host, user, password, database):
+def create_mysql_connection(host, user, password, database, port = 3307):
     """
     Crée et retourne une connexion MySQL.
     Retourne None en cas d'erreur.
     """
     try : 
         conn = mysql.connector.connect(
-            host=host, user=user, port=3307,
+            host=host, user=user, port= port,
             password=password, database=database
         )
         print("Connexion MySQL réussie.")

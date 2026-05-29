@@ -1,0 +1,18 @@
+[2026-05-25T13:50:24.370+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: data_lake_pipeline.transform manual__2026-05-25T13:50:17.252418+00:00 [queued]>
+[2026-05-25T13:50:24.376+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: data_lake_pipeline.transform manual__2026-05-25T13:50:17.252418+00:00 [queued]>
+[2026-05-25T13:50:24.377+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 2
+[2026-05-25T13:50:24.388+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): transform> on 2026-05-25 13:50:17.252418+00:00
+[2026-05-25T13:50:24.393+0000] {standard_task_runner.py:57} INFO - Started process 2030 to run task
+[2026-05-25T13:50:24.397+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'data_lake_pipeline', 'transform', 'manual__2026-05-25T13:50:17.252418+00:00', '--job-id', '31', '--raw', '--subdir', 'DAGS_FOLDER/data_lake_pipeline.py', '--cfg-path', '/tmp/tmpfvnjhgz1']
+[2026-05-25T13:50:24.399+0000] {standard_task_runner.py:85} INFO - Job 31: Subtask transform
+[2026-05-25T13:50:24.409+0000] {logging_mixin.py:151} WARNING - /home/***/.local/lib/python3.8/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2026-05-25T13:50:24.425+0000] {task_command.py:415} INFO - Running <TaskInstance: data_lake_pipeline.transform manual__2026-05-25T13:50:17.252418+00:00 [running]> on host 4f10631135a5
+[2026-05-25T13:50:24.461+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='data_lake_pipeline' AIRFLOW_CTX_TASK_ID='transform' AIRFLOW_CTX_EXECUTION_DATE='2026-05-25T13:50:17.252418+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-25T13:50:17.252418+00:00'
+[2026-05-25T13:50:24.462+0000] {logging_mixin.py:151} INFO - Nettoyage des données...
+[2026-05-25T13:50:24.770+0000] {logging_mixin.py:151} INFO -   ✓ 21713 lignes conservées pour 'train'
+[2026-05-25T13:50:24.978+0000] {logging_mixin.py:151} INFO -   ✓ 2361 lignes conservées pour 'validation'
+[2026-05-25T13:50:25.018+0000] {logging_mixin.py:151} INFO -   ✓ 2792 lignes conservées pour 'test'
+[2026-05-25T13:50:25.043+0000] {python.py:194} INFO - Done. Returned value was: cleaned
+[2026-05-25T13:50:25.056+0000] {taskinstance.py:1398} INFO - Marking task as SUCCESS. dag_id=data_lake_pipeline, task_id=transform, execution_date=20260525T135017, start_date=20260525T135024, end_date=20260525T135025
+[2026-05-25T13:50:25.077+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2026-05-25T13:50:25.091+0000] {taskinstance.py:2776} INFO - 1 downstream tasks scheduled from follow-on schedule check

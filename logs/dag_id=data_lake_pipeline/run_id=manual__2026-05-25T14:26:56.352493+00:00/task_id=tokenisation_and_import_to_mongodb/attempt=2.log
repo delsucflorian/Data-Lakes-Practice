@@ -1,0 +1,18 @@
+[2026-05-25T14:32:21.720+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: data_lake_pipeline.tokenisation_and_import_to_mongodb manual__2026-05-25T14:26:56.352493+00:00 [queued]>
+[2026-05-25T14:32:21.723+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: data_lake_pipeline.tokenisation_and_import_to_mongodb manual__2026-05-25T14:26:56.352493+00:00 [queued]>
+[2026-05-25T14:32:21.723+0000] {taskinstance.py:1359} INFO - Starting attempt 2 of 2
+[2026-05-25T14:32:21.728+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): tokenisation_and_import_to_mongodb> on 2026-05-25 14:26:56.352493+00:00
+[2026-05-25T14:32:21.732+0000] {standard_task_runner.py:57} INFO - Started process 404 to run task
+[2026-05-25T14:32:21.734+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'data_lake_pipeline', 'tokenisation_and_import_to_mongodb', 'manual__2026-05-25T14:26:56.352493+00:00', '--job-id', '21', '--raw', '--subdir', 'DAGS_FOLDER/data_lake_pipeline.py', '--cfg-path', '/tmp/tmpcje21pt0']
+[2026-05-25T14:32:21.736+0000] {standard_task_runner.py:85} INFO - Job 21: Subtask tokenisation_and_import_to_mongodb
+[2026-05-25T14:32:21.749+0000] {logging_mixin.py:151} WARNING - /home/***/.local/lib/python3.8/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2026-05-25T14:32:21.771+0000] {task_command.py:415} INFO - Running <TaskInstance: data_lake_pipeline.tokenisation_and_import_to_mongodb manual__2026-05-25T14:26:56.352493+00:00 [running]> on host e94cdef51b5c
+[2026-05-25T14:32:21.804+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='data_lake_pipeline' AIRFLOW_CTX_TASK_ID='tokenisation_and_import_to_mongodb' AIRFLOW_CTX_EXECUTION_DATE='2026-05-25T14:26:56.352493+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-25T14:26:56.352493+00:00'
+[2026-05-25T14:32:21.805+0000] {logging_mixin.py:151} INFO - Tokenisation et importation dans MongoDB...
+[2026-05-25T14:32:21.825+0000] {logging_mixin.py:151} INFO - Connexion MySQL réussie.
+[2026-05-25T14:32:30.622+0000] {logging_mixin.py:151} INFO -   86852 documents insérés dans MongoDB.
+[2026-05-25T14:32:30.623+0000] {logging_mixin.py:151} INFO - Tokenisation et importation terminée.
+[2026-05-25T14:32:30.777+0000] {python.py:194} INFO - Done. Returned value was: None
+[2026-05-25T14:32:30.792+0000] {taskinstance.py:1398} INFO - Marking task as SUCCESS. dag_id=data_lake_pipeline, task_id=tokenisation_and_import_to_mongodb, execution_date=20260525T142656, start_date=20260525T143221, end_date=20260525T143230
+[2026-05-25T14:32:30.893+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2026-05-25T14:32:30.915+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

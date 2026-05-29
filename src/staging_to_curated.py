@@ -18,7 +18,7 @@ from tqdm import tqdm
 from load_to_staging import create_mysql_connection
 
 
-def get_staging_data(host, user, password, database, split="train"):
+def get_staging_data(host, user, password, database, split="train", port= 3307):
     """
     Récupère les textes depuis la table MySQL 'texts' pour un split donné.
     
@@ -38,7 +38,7 @@ def get_staging_data(host, user, password, database, split="train"):
     #   5. Fermer la connexion
     #   6. Retourner les résultats
 
-    conn = create_mysql_connection(host, user, password, database)
+    conn = create_mysql_connection(host, user, password, database, port)
     if not conn:
         return None
     else : 
