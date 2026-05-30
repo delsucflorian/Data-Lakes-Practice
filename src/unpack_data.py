@@ -66,7 +66,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Unpack and combine CSV files.")
     parser.add_argument("--input_dir", type=str, required=True)
     parser.add_argument("--output_file", type=str, required=True)
-
+    parser.add_argument("--bucket_name", type=str, default="raw")
     args = parser.parse_args()
 
     unpack_data(args.input_dir, args.output_file)
