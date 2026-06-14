@@ -1,0 +1,20 @@
+schema: '2.0'
+stages:
+  unpack:
+    cmd: python src/unpack_data.py --input_dir ./data/bronze/random_split/ 
+      --output_file combined_raw.csv
+    deps:
+    - path: data/bronze/random_split/
+      hash: md5
+      md5: a04a4b48d5045b9ceab5bc3653b00441.dir
+      size: 651149298
+      nfiles: 100
+    - path: src/unpack_data.py
+      hash: md5
+      md5: 23a3d5c391fdabe9222e8b42c5cbdf96
+      size: 2858
+    outs:
+    - path: combined_raw.csv
+      hash: md5
+      md5: 63f7f12fbe4bff207c7ead1fd206c4f9
+      size: 651142665

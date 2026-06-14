@@ -25,6 +25,8 @@ AWS_ACCESS_KEY_ID     = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 AWS_REGION            = os.getenv("AWS_REGION", "eu-west-1")
 S3_BUCKET_NAME        = os.getenv("S3_BUCKET_NAME")
+S3_ENDPOINT_URL       = os.getenv("S3_ENDPOINT_URL")
+MONGO_URI            = os.getenv("MONGO_URI")
 
 
 # ---------------------------------------------------------------------------
@@ -34,11 +36,11 @@ S3_BUCKET_NAME        = os.getenv("S3_BUCKET_NAME")
 def get_s3_client():
     return boto3.client(
         "s3",
+        endpoint_url=S3_ENDPOINT_URL,        # ← ajouter (None en prod = vrai AWS)
         aws_access_key_id=AWS_ACCESS_KEY_ID,
         aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
         region_name=AWS_REGION,
     )
-
 
 # ---------------------------------------------------------------------------
 # Exercice 1 — /health
@@ -58,7 +60,6 @@ class HealthResponse(BaseModel):
 @app.get("/health", response_model=HealthResponse, tags=["Monitoring"])
 async def health_check():
     connections: dict[str, ServiceStatus] = {}
-
     # — S3 —
     try:
         s3 = get_s3_client()
@@ -198,3 +199,62 @@ async def get_raw_object(
         raise HTTPException(status_code=422, detail=f"Fichier non parseable en JSON : {str(e)}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+# Exercice 3 — /staging/ (couche MySQL)
+mysql_config = {
+    "host": os.getenv("MYSQL_HOST", "localhost"),
+    "port": int(os.getenv("MYSQL_PORT", 3307)),
+    "user": os.getenv("MYSQL_USER", "root"),
+    "password": os.getenv("MYSQL_PASSWORD", "root"),
+    "database": os.getenv("MYSQL_DATABASE", "staging"),
+} 
+@app.get("/staging/", tags=["Staging - MySQL"])
+#configurer la connexion à MySQL via les variables d'environnement
+async def list_staging_records(split: Optional[str] = Query(default=None, description="Filtre par split (ex: 'train', 'test', 'validation')" ),
+                               limit: int = Query(default=100, ge=1, le=1000)
+) -> dict:
+    """
+    Liste les enregistrements de la table `texts` dans MySQL.
+    retourne un JSON avec le nombre total d'enregistrements et une liste d'objets {id, text}.
+    - **split** : filtre par split (train/test/validation)
+    - **limit** : plafond de résultats (1–1000)
+    """
+    try:
+        import mysql.connector
+        conn = mysql.connector.connect(**mysql_config)
+        cur = conn.cursor(dictionary=True)
+        if split:
+            cur.execute("SELECT id, text, split FROM texts WHERE split = %s LIMIT %s", (split, limit))
+        else : 
+            cur.execute("SELECT id, text, split FROM texts LIMIT %s", (limit,))
+        rows = cur.fetchall()
+        conn.close()
+        return {"total": len(rows), "records": rows}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/curated/", tags=["Curated - MongoDB"])
+async def list_curated_records(limit: Optional[int] = Query(default=100, ge=1, le=1000)) -> dict:
+    import pymongo
+    client = pymongo.MongoClient("mongodb://localhost:27017/",
+                                     serverSelectionTimeoutMS=3000)
+    client.server_info()
+    db = client["curated"]
+    if limit:
+        records = list(db["wikitext"].find({}, {"_id": 0, "original_id": 1, "text": 1, "num_tokens": 1 }).limit(limit))
+    else:
+        records = list(db["wikitext"].find({}, {"_id": 0, "id": 1, "text": 1}))
+    client.close()
+    return {"total": len(records), "records": records}
+
+
+@app.get("/totalCurated/", tags=["Curated - total"])
+async def total_curated_records() -> int:
+    import pymongo
+    client = pymongo.MongoClient("mongodb://localhost:27017/",
+                                    serverSelectionTimeoutMS=3000)
+    client.server_info()
+    db = client["curated"]
+    total = db["wikitext"].count_documents({})
+    client.close()
+    return total
